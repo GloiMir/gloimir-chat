@@ -8,7 +8,7 @@ mongoose.connect(process.env.CONNECTION_STRING,{ useNewUrlParser: true,useUnifie
 .then(()=>console.log('Connexion à MongoDB a reussi'))
 .catch(()=>console.log('Connexion à MongoDB a échoué'))
 
-// app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false}))
 
 app.use((_,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');

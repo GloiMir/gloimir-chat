@@ -1,7 +1,27 @@
+export const SEND_USERS =  "SEND_USERS"
+export const SEND_MESSAGES = "SEND_MESSAGES"
 export const SET_EXPEDITOR = "SET_EXPEDITOR"
 export const SET_DESTINATOR = "SET_DESTINATOR"
 export const SET_DISCUSSION = "SET_DISCUSSION"
 export const ADD_MESSAGE = "ADD_MESSAGE"
+
+export const sendMessages = messages=>dispatch=>{
+    dispatch(
+        {
+            type:SEND_MESSAGES,
+            payload:messages
+        }
+    )
+}
+
+export const sendUsers = users=>dispatch=>{
+    dispatch(
+        {
+            type:SEND_USERS,
+            payload:users
+        }
+    )
+}
 
 export const setExpeditor = user=>dispatch=>{
     dispatch(

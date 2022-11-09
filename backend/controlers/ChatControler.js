@@ -13,10 +13,17 @@ const sendMessages = (_,res)=>{
         .catch(error=>res.status(400).json({error}))
 }
 
-const sendDiscussion = (_,res)=>{
-    Message.find({from:" 63682b5ff27b266c3b3c4d2b "|" 63682c4bf27b266c3b3c4d2d ",to:" 63682b5ff27b266c3b3c4d2b "|" 63682c4bf27b266c3b3c4d2d "})
-        .then((messages)=>res.status(200).json(messages))
-        .catch(error=>res.status(400).json({error}))
+const createMessage =  (req,res)=>{
+    // req.on('data', (chunk)=> {
+    //     console.log(JSON.parse(chunk.toString()))
+    // })
+    
+    req.on('data', (chunk)=> {
+        const message = new Message({...JSON.parse(chunk.toString())})
+        message.save()
+        .then(()=>console.log("Un nouveau message vient d'etre inseré"))
+        .catch((error)=>console.log(error))
+    })
 }
 
-module.exports = {sendUsers,sendMessages,sendDiscussion}
+module.exports = {sendUsers,sendMessages,createMessage}
