@@ -14,10 +14,6 @@ const sendMessages = (_,res)=>{
 }
 
 const createMessage =  (req,res)=>{
-    // req.on('data', (chunk)=> {
-    //     console.log(JSON.parse(chunk.toString()))
-    // })
-    
     req.on('data', (chunk)=> {
         const message = new Message({...JSON.parse(chunk.toString())})
         message.save()
@@ -26,4 +22,13 @@ const createMessage =  (req,res)=>{
     })
 }
 
-module.exports = {sendUsers,sendMessages,createMessage}
+const createUser =  (req,res)=>{
+    req.on('data', (chunk)=> {
+        const user = new User({...JSON.parse(chunk.toString())})
+        user.save()
+        .then(()=>console.log("Un nouveau utilisateur vient d'etre inseré"))
+        .catch((error)=>console.log(error))
+    })
+}
+
+module.exports = {sendUsers,sendMessages,createMessage,createUser}
