@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDestinator, setDiscussion, addMessage } from '../redux/actions'
+import socketClient from 'socket.io-client'
 
 export default function Connect() {
     const [showChat, setShowChat] = useState(false)
@@ -54,6 +55,8 @@ export default function Connect() {
                                 }
                             ));
                             setMyMessage("")
+                            const io = socketClient("http://localhost:4000")
+                            io.on('newMessage',(data)=>console.log(data))
                         }
                     }>Envoyer</button>
                 </div>
