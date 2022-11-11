@@ -22,7 +22,6 @@ export default function Connect() {
                                         return (element.from === expeditor._id && element.to === destinator._id) || (element.to === expeditor._id && element.from === destinator._id)
                                     })
                                     dispatch(setDiscussion(myDiscussion))
-                                    dispatch(setDestinator(item))
                                     setShowChat(true)
                                 }} key={index}>{item.username}</li>
                             )

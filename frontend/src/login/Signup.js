@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
-import { sendUsers } from '../redux/actions'
+import { sendUsers,setExpeditor } from '../redux/actions'
 import Login from './Login'
+import Connect from '../connect/Connect'
 
 
 export default function Signup() {
-    const [login, setLogin] = useState(false)
+    const [connect,setConnect] = useState(false)
     const { users } = useSelector((state) => state.userReducer)
     const dispatch = useDispatch()
     const [newUsername, setNewUsername] = useState("")
@@ -19,12 +20,13 @@ export default function Signup() {
             .then((res) => {
                 console.log("Nous venons de créer un nouvel utilisateur")
                 dispatch(sendUsers(res.data))
-                setLogin(true)
+                dispatch(setExpeditor(res.data[res.data.length-1]))
+                setConnect(true)
             })
             .catch(() => console.log('Chargement des users echoue'))
     }
 
-    if (!login) {
+    if (!connect) {
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <input type={'text'} onChange={(e) => setNewUsername(e.target.value)} />
@@ -50,5 +52,5 @@ export default function Signup() {
                 >Creer</button>
             </div>
         )
-    } else return <Login />
+    } else return <Connect />
 }
