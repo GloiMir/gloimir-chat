@@ -1,5 +1,4 @@
 import './App.css';
-import socketClient from 'socket.io-client'
 import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import {sendUsers,sendMessages} from './redux/actions'

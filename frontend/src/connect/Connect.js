@@ -1,15 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { setDestinator, setDiscussion, addMessage } from '../redux/actions'
+import { setDestinator, setDiscussion, addMessage, addUser } from '../redux/actions'
 import socketClient from 'socket.io-client'
 
 export default function Connect() {
     const [showChat, setShowChat] = useState(false)
     const [myMessage, setMyMessage] = useState("")
     const dispatch = useDispatch()
-
     const { users, messages, expeditor, destinator, discussion } = useSelector((state) => state.userReducer)
+    // useEffect(()=>{
+        const io = socketClient("http://localhost:4000")
+        io.on('newMessage',(data)=>{
+            if(data.to===expeditor._id){
+                dispatch(addMessage(data))
+                console.log('Nous avons reçu un message depuis un autre utilisateur')
+                return
+            }
+        })
+        io.on('newuser',(data)=>{
+            dispatch(addUser(data))
+        })
+    // },[dispatch,expeditor._id])
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <div>
@@ -55,8 +67,6 @@ export default function Connect() {
                                 }
                             ));
                             setMyMessage("")
-                            const io = socketClient("http://localhost:4000")
-                            io.on('newMessage',(data)=>console.log(data))
                         }
                     }>Envoyer</button>
                 </div>

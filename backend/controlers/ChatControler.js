@@ -3,7 +3,6 @@ import {Message} from '../models/Message.js' //Notre modele de données message
 import { io } from '../server.js'
 
 const sendUsers = (_,res)=>{
-    
     User.find()
         .then((users)=>res.status(200).json(users))
         .catch(error=>res.status(400).json({error}))
@@ -20,11 +19,12 @@ const createMessage =  (req,res)=>{
         const message = new Message({...JSON.parse(chunk.toString())})
         message.save()
         .then(()=>{
-            io.on('connection',(socket)=>{
-                socket.emit('newMessage',message)
-            })
+            console.log("Un nouveau message vient d'etre inseré")
         })
         .catch((error)=>console.log(error))
+        io.on('connection',(socket)=>{
+            socket.broadcast.emit('newMessage',message)
+        })
     })
 }
 
@@ -34,6 +34,9 @@ const createUser =  (req,res)=>{
         user.save()
         .then(()=>console.log("Un nouveau utilisateur vient d'etre inseré"))
         .catch((error)=>console.log(error))
+        io.on('connection',(socket)=>{
+            socket.broadcast.emit('newUser',user)
+        })
     })
 }
 

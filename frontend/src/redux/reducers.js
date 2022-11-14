@@ -25,6 +25,9 @@ function userReducer(state = initialState, action) {
             discussion.push(action.payload)
             messages.push(action.payload)
             return { users, messages, expeditor, destinator, discussion }
+        case ADD_USER:
+            users.push(action.payload)
+            return { users, messages, expeditor, destinator, discussion }
         default:
             return state
     }
