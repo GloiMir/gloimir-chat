@@ -1,9 +1,3 @@
-// const app = require('express')()
-// const mongoose = require('mongoose')
-// const dotenv = require('dotenv')
-// const cors = require('cors')
-// const serveur = require('http').createServer(app)
-
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
@@ -26,14 +20,12 @@ const io =new Server(serveur, {
         methods: ["GET", "POST"]
     }
 })
+export const listSockets = []
 io.on('connection',(socket)=>{
-    console.log('Un client vient de se connecter..')
-    socket.emit('message',"Bonjour cher utilisateur")
+    listSockets.push(socket)
 })
 
 app.use(cors())
 app.use(route)
 
-// app.listen(4000,()=>console.log('Notre serveur est en marche...'))
 serveur.listen(4000,()=>console.log('Notre serveur est en marche...'))
-export {io}

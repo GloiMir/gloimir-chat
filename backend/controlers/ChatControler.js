@@ -1,6 +1,6 @@
 import {User} from  '../models/User.js' //Notre modele de données user
 import {Message} from '../models/Message.js' //Notre modele de données message
-import { io } from '../server.js'
+import { listSockets } from '../server.js'
 
 const sendUsers = (_,res)=>{
     User.find()
@@ -22,9 +22,7 @@ const createMessage =  (req,res)=>{
             console.log("Un nouveau message vient d'etre inseré")
         })
         .catch((error)=>console.log(error))
-        io.on('connection',(socket)=>{
-            socket.broadcast.emit('newMessage',message)
-        })
+        listSockets.forEach((socket) => socket.emit('newMessage',message))
     })
 }
 
@@ -34,9 +32,7 @@ const createUser =  (req,res)=>{
         user.save()
         .then(()=>console.log("Un nouveau utilisateur vient d'etre inseré"))
         .catch((error)=>console.log(error))
-        io.on('connection',(socket)=>{
-            socket.broadcast.emit('newUser',user)
-        })
+        listSockets.forEach((socket) => socket.emit('newUser',user))
     })
 }
 

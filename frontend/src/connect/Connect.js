@@ -7,10 +7,11 @@ import socketClient from 'socket.io-client'
 export default function Connect() {
     const [showChat, setShowChat] = useState(false)
     const [myMessage, setMyMessage] = useState("")
+    const [io,setIo] = useState(socketClient("http://localhost:4000"))
     const dispatch = useDispatch()
     const { users, messages, expeditor, destinator, discussion } = useSelector((state) => state.userReducer)
-    // useEffect(()=>{
-        const io = socketClient("http://localhost:4000")
+    useEffect(()=>{
+        // const io = socketClient("http://localhost:4000")
         io.on('newMessage',(data)=>{
             if(data.to===expeditor._id){
                 dispatch(addMessage(data))
@@ -18,10 +19,10 @@ export default function Connect() {
                 return
             }
         })
-        io.on('newuser',(data)=>{
+        io.on('newUser',(data)=>{
             dispatch(addUser(data))
         })
-    // },[dispatch,expeditor._id])
+    },[dispatch,expeditor,io])
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <div>
