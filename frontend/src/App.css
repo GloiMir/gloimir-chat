@@ -1,38 +1,251 @@
-.App {
-  text-align: center;
+ /* Design de la page de login */
+.login{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height:100vh;
+  width: 100vw;
+  background-color: #D4E4C8;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login>div:first-child{
   display: flex;
   flex-direction: column;
+  justify-content:center;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 50%;
+  height: 100%;
+}
+.login>div:first-child>img{
+  width:30vw;
+  height:30vw;
+}
+.login>div:first-child>h3{
+  color: #0C573C;
+  text-align: center;
+}
+.login>div:last-child{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+.login>div:last-child>h1{
+  color: #0C573C;
+}
+.login>div:last-child>input{
+  border-radius: 10px;
+  width: 80%;
+  height: 10%;
+  border-style: none;
+  color: #0C573C;
+}
+.login>div:last-child>button{
+  border-radius: 10px;
+  width: 80%;
+  height: 10%;
+  background-color: #0C573C;
+  color: #DFAB0E;
+  border-style: none;
+}
+.login>div:last-child>small{
+  color: #0C573C;
+}
+
+/* Design de la page de Signup */
+.signup{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height:100vh;
+  width: 100vw;
+  background-color: #D4E4C8;
+}
+.signup>div:first-child{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+.signup>div:first-child>img{
+  width: 30vw;
+  height: 30vw;
+}
+.signup>div:first-child>h3{
+  color: #0C573C;
+  text-align: center;
+}
+.signup>div:last-child{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+.signup>div:last-child>h1{
+  color: #0C573C;
+}
+.signup>div:last-child>input{
+  border-radius: 10px;
+  width: 80%;
+  height: 10%;
+  border-style: none;
+  color: #0C573C;
+}
+.signup>div:last-child>button{
+  border-radius: 10px;
+  width: 80%;
+  height: 10%;
+  background-color: #0C573C;
+  color: #DFAB0E;
+  border-style: none;
+}
+.signup>div:last-child>small{
+  color: #0C573C;
+}
+
+/* Design de la page de Connect */
+.connect{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height:100vh;
+  width: 100vw;
+  background-color: #D4E4C8;
+}
+.connect>div:first-child{
+  display: flex;
+  flex-direction: column;
+  display: flex;
+  align-items: flex-start;
+  overflow-y: scroll;
+  width: 25%;
+  height: 100%;
+}
+.connect>div:first-child>button{
+  background-color: #0C573C;
+  color: #DFAB0E;
+  margin-left: 3px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  border-radius: 5px;
+  border-style: none;
+}
+.connect>div:last-child{
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  height: 100%;
+}
+.connect>div:last-child>div:first-child{
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+  height: 10%;
+  justify-content:space-around;
+  align-items: center;
+  position: fixed;
+  margin-bottom: 3px;
+  top: 0%;
+  right: 0%;
+}
+.connect>div:last-child>div:first-child>div:first-child{
+  width: 30%;
+  height: 100%;
+  background-color: #0C573C;
+  /* opacity: 0.8; */
+}
+.connect>div:last-child>div:first-child>img{
+  width:50px;
+  height: 50px;
+}
+.connect>div:last-child>div:first-child>div:last-child{
+  width: 30%;
+  height: 100%;
+  background-color:#DFAB0E;
+  /* opacity: 0.8; */
+}
+.connect>div:last-child>div:last-child>div:first-child{
+  height: 80%;
+  width: 75%;
+  overflow-y: scroll;
+  justify-content: flex-end;
+  /* background-color: red; */
+  position: fixed;
+  top: 10%;
+  right: 0%;
+  /* opacity: 0.5; */
+}
+.connect>div:last-child>div:last-child>div:last-child{
+  display: flex;
+  width: 75%;
+  height: 10%;
+  /* background-color: green; */
+  position: fixed;
+  bottom: 0%;
+  right: 0%;
+  justify-content:space-around;
+  align-items: center;
+}
+.connect>div:last-child>div:last-child>div:last-child>input{
+  width: 80%;
+  height: 100%;
+  border-style: none;
+  border-radius: 10px;
+  color: #0C573C;
+}
+.connect>div:last-child>div:last-child>div:last-child>button{
+  border-radius: 10px;
+  width: 15%;
+  height: 80%;
+  background-color: #0C573C;
+  color: #DFAB0E;
+  border-style: none; 
+}
+.expediteur{
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.expediteur>div{
+  background-color: #0C573C;
+  width: fit-content;
+  height: fit-content;
+  max-width: 75%;
+  margin-bottom: 3px;
+  margin-left: 5px;
+  border-radius: 10px;
+  padding: 10px;
   color: white;
+  font-weight: bold;
+}
+.destinataire{
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content :flex-end;
+}
+.destinataire>div{
+  background-color: #DFAB0E;
+  width: fit-content;
+  height: fit-content;
+  max-width: 75%;
+  margin-bottom: 3px;
+  margin-right: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* vert = #0C573C op = 0.5
+jaune = #DFAB0E op= 0.2
+bg = #D4E4C8 op = 0.23 */
