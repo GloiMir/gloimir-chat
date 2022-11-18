@@ -126,21 +126,28 @@
   display: flex;
   align-items: flex-start;
   overflow-y: scroll;
+  overflow-x: scroll;
   width: 25%;
   height: 100%;
 }
 .connect>div:first-child>button{
+  display: flex;
+  /* flex-direction: column; */
   background-color: #0C573C;
   color: #DFAB0E;
+  font-weight: bold;
   margin-left: 3px;
   margin-bottom: 2px;
   margin-top: 2px;
   border-radius: 5px;
+  align-items: center;
+  justify-content: center;
   border-style: none;
 }
 .connect>div:last-child{
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   width: 75%;
   height: 100%;
 }
@@ -149,27 +156,37 @@
   flex-direction: row;
   width: 75%;
   height: 10%;
-  justify-content:space-around;
+  justify-content:space-between;
   align-items: center;
   position: fixed;
-  margin-bottom: 3px;
+  /* margin-bottom: 3px; */
   top: 0%;
   right: 0%;
 }
 .connect>div:last-child>div:first-child>div:first-child{
-  width: 30%;
+  display: flex;
+  width: 40%;
   height: 100%;
   background-color: #0C573C;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
   /* opacity: 0.8; */
 }
 .connect>div:last-child>div:first-child>img{
-  width:50px;
-  height: 50px;
+  width: 5vw;
+  height: 5vw;
 }
 .connect>div:last-child>div:first-child>div:last-child{
-  width: 30%;
+  display: flex;
+  width: 40%;
   height: 100%;
   background-color:#DFAB0E;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
   /* opacity: 0.8; */
 }
 .connect>div:last-child>div:last-child>div:first-child{
@@ -219,13 +236,15 @@
   background-color: #0C573C;
   width: fit-content;
   height: fit-content;
+  display: flex;
+  flex-direction: column;
   max-width: 75%;
   margin-bottom: 3px;
   margin-left: 5px;
   border-radius: 10px;
   padding: 10px;
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 .destinataire{
   height: fit-content;
@@ -237,13 +256,15 @@
   background-color: #DFAB0E;
   width: fit-content;
   height: fit-content;
+  display: flex;
+  flex-direction: column;
   max-width: 75%;
   margin-bottom: 3px;
   margin-right: 5px;
   border-radius: 10px;
   padding: 10px;
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 /* vert = #0C573C op = 0.5

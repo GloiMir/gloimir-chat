@@ -22,7 +22,7 @@ export default function Login() {
             <h3>Very simple application for connecting friends</h3>
           </div>
           <div>
-            <h1>Login</h1>
+            <h1>Welcome</h1>
             <input type={'text'} placeholder='Username' onChange={(e) => setUsername(e.target.value)} />
             <input type={'password'} placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
             <button

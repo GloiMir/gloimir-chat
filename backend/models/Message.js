@@ -7,6 +7,5 @@ const schemaMessage = new mongoose.Schema({
     content:String
 })
 
-// module.exports = mongoose.model('message',schemaMessage)
 const Message = mongoose.model('message',schemaMessage)
 export {Message}
