@@ -7,7 +7,7 @@ import http from 'http'
 import {Server} from 'socket.io'
 const app = express()
 const serveur = http.createServer(app)
-
+  
 dotenv.config()
 
 mongoose.connect(process.env.CONNECTION_STRING,{ useNewUrlParser: true,useUnifiedTopology: true })

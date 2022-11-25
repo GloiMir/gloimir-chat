@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
-import { sendUsers, setExpeditor } from '../redux/actions'
+import { sendUsers, setExpeditor, setDestinator, setDiscussion } from '../redux/actions'
 import Login from './Login'
 import Connect from '../connect/Connect'
 
+const aleatoire = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
 export default function Signup() {
     const [connect, setConnect] = useState(false)
     const [login, setLogin] = useState(false)
-    const { users } = useSelector((state) => state.userReducer)
+    const { users,messages,expeditor,destinator } = useSelector((state) => state.userReducer)
     const dispatch = useDispatch()
     const [newUsername, setNewUsername] = useState("")
     const [newPassword1, setNewPassword1] = useState("")
@@ -22,6 +25,14 @@ export default function Signup() {
                 console.log("Nous venons de créer un nouvel utilisateur")
                 dispatch(sendUsers(res.data))
                 dispatch(setExpeditor(res.data[res.data.length - 1]))
+                dispatch(setDestinator(users[aleatoire(0,res.data.length - 1)]))
+                  dispatch(
+                    setDiscussion(
+                      messages.filter(
+                        (element)=>(element.from === expeditor._id && element.to === destinator._id) || (element.to === expeditor._id && element.from === destinator._id)
+                      )
+                    )
+                  )
                 setConnect(true)
             })
             .catch(() => console.log('Chargement des users echoue'))
@@ -64,11 +75,33 @@ export default function Signup() {
                     "password": newPassword1,
                     "image": url
                 });
-                setTimeout(loadUsers, 1000)
+                // setTimeout(loadUsers, 1000)
             } else console.log("Les 2 passwords ne sont pas identiques..")
         } else console.log("Username deja utilisé..")
-        // console.log(url);
     }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        // const { password, username, email } = values;
+        // if (
+        //   values.password.trim() !== "" &&
+        //   values.username.trim() !== "" &&
+        //   values.email.trim() !== ""
+        // ) {
+          const { data } = await axios.post("http://localhost:4000/register", {
+            "username":newUsername,
+            "password":newPassword1,
+          });
+          if (data.status === false) {
+            console.log("Error");
+          } else {
+            console.log("Success");
+          }
+        // } else {
+        //   console.log("Complete all fields");
+        // }
+      };
 
     if (!connect) {
         if (!login) {
@@ -76,32 +109,18 @@ export default function Signup() {
                 <div className='signup'>
                     <div>
                         <img src={require('../logo-chat.png')} alt='' />
-                        <h3>Very simple app for connecting friends</h3>
+                        <h3>Very simple application for connecting friends</h3>
                     </div>
                     <div>
                         <h1>Welcome</h1>
                         <input type={'text'} placeholder='Username' onChange={(e) => setNewUsername(e.target.value)} />
                         <input type={'password'} placeholder='Password' onChange={(e) => setNewPassword1(e.target.value)} />
                         <input type={'password'} placeholder='Confirm password' onChange={(e) => setNewPassword2(e.target.value)} />
-                        <input type={'file'} placeholder='image' onChange={validationImg} />
+                        <button><input type={'file'} placeholder='image' onChange={validationImg} /></button>
                         <button
                             onClick={
-                                // () => {
-                                handleSignup
-                                // const myUser = users.filter((element) => {
-                                //     return element.username === newUsername
-                                // })
-                                // if (myUser.length === 0) {
-                                //     if (newPassword1 === newPassword2) {
-                                //         axios.post("http://localhost:4000/user", {
-                                //             "username": newUsername,
-                                //             "password": newPassword1,
-                                //             "image": image
-                                //         });
-                                //         setTimeout(loadUsers, 1000)
-                                //     } else console.log("Les 2 passwords ne sont pas identiques..")
-                                // } else console.log("Username deja utilisé..")
-                                // }
+                                // handleSignup
+                                handleSubmit
                             }
                         >Creer</button>
                         <small>Ou</small>
