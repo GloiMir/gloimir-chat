@@ -227,18 +227,24 @@
   border-style: none; 
 }
 .expediteur{
+  /* height: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start; */
+
   height: fit-content;
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content :flex-end;
 }
 .expediteur>div{
-  background-color: #0C573C;
+  background-color: #DFAB0E;
   width: fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;
   max-width: 75%;
+  margin-top: 2px;
   margin-bottom: 3px;
   margin-left: 5px;
   border-radius: 10px;
@@ -247,18 +253,24 @@
   /* font-weight: bold; */
 }
 .destinataire{
+  /* height: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content :flex-end; */
+
   height: fit-content;
   width: 100%;
   display: flex;
-  justify-content :flex-end;
+  justify-content: flex-start;
 }
 .destinataire>div{
-  background-color: #DFAB0E;
+  background-color: #0C573C ;
   width: fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;
   max-width: 75%;
+  margin-top: 2px;
   margin-bottom: 3px;
   margin-right: 5px;
   border-radius: 10px;

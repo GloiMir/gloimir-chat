@@ -1,19 +1,42 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { setExpeditor,setDestinator } from '../redux/actions'
+import axios from 'axios'
+import { useDispatch, } from 'react-redux'
+import { setExpeditor,sendUsers,sendMessages} from '../redux/actions'
 import Signup from './Signup'
 import Connect from '../connect/Connect'
 
+
 export default function Login() {
-  const { users} = useSelector((state) => state.userReducer)
+  // const { users,messages,expeditor,destinator} = useSelector((state) => state.userReducer)
   const dispatch = useDispatch()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const [connect, setConenct] = useState(false)
   const [signup, setSignup] = useState(false)
 
-  if (!connect) {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const { data } = await axios.post("http://localhost:4000/login", {
+      username,
+      password
+    });
+    if (data.status === false) {
+      console.log("Username Or Password Invalid");
+    } else {
+      axios.get("http://localhost:4000/users", {headers: {Authorization: "Bearer " + (data.token),}})
+        .then((res) => {dispatch(sendUsers(res.data));dispatch(setExpeditor(res.data.filter(element=>element._id===data.userId)[0])) })
+        .catch(() => console.log('Chargement des users echoue'))
+      axios.get("http://localhost:4000/messages", {headers: {Authorization: "Bearer " + (data.token),}})
+        .then((res) => {dispatch(sendMessages(res.data)); })
+        .catch(() => console.log('Chargement des messages echoue'))  
+
+      localStorage.setItem("expeditor", data.userId);
+      localStorage.setItem("token",data.token);
+    }
+  };
+
+
+  if (!localStorage.getItem("expeditor")) {
     if (!signup) {
       return (
         <div className='login'>
@@ -26,16 +49,7 @@ export default function Login() {
             <input type={'text'} placeholder='Username' onChange={(e) => setUsername(e.target.value)} />
             <input type={'password'} placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
             <button
-              onClick={() => {
-                const myUser = users.filter((element) => {
-                  return element.username === username && element.password === password
-                })
-                if (myUser.length !== 0) {
-                  dispatch(setExpeditor(myUser[0]))
-                  dispatch(setDestinator(myUser[0]))
-                  setConenct(true)
-                } else console.log("Utilisateur invalide..")
-              }}
+              onClick={handleSubmit}
             >Se connecter</button>
             <small>Ou</small>
             <button onClick={() => setSignup(true)}>Créer un compte</button>
@@ -47,6 +61,12 @@ export default function Login() {
     }
 
   } else {
+    axios.get("http://localhost:4000/users", {headers: {Authorization: "Bearer " + (localStorage.getItem("token")),}})
+      .then((res) => {dispatch(sendUsers(res.data));dispatch(setExpeditor(res.data.filter(element=>element._id===localStorage.getItem("expeditor"))[0])) })
+      .catch(() => console.log('Chargement des users echoue'))
+    axios.get("http://localhost:4000/messages", {headers: {Authorization: "Bearer " + localStorage.getItem("token"),}})
+      .then((res) => {dispatch(sendMessages(res.data)); })
+      .catch(() => console.log('Chargement des messages echoue'))  
     return <Connect />
   }
 }
