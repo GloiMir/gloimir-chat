@@ -10,7 +10,7 @@ const aleatoire = (min, max) => {
 }
 
 export default function Login() {
-  const { users,messages,expeditor,destinator} = useSelector((state) => state.userReducer)
+  // const { users,messages,expeditor,destinator} = useSelector((state) => state.userReducer)
   const dispatch = useDispatch()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -28,6 +28,7 @@ export default function Login() {
     if (data.status === false) {
       console.log("Username Or Password Invalid");
     } else {
+      // console.log("Bearer " + (data.token))
       // console.log(JSON.stringify(data.token))
       axios.get("http://localhost:4000/users", {headers: {Authorization: "Bearer " + (data.token),}})
         .then((res) => {dispatch(sendUsers(res.data));dispatch(setExpeditor(res.data.filter(element=>element._id===data.userId)[0])) })
@@ -37,8 +38,9 @@ export default function Login() {
         .catch(() => console.log('Chargement des messages echoue'))  
       // localStorage.setItem("token", JSON.stringify(data.token));
       // localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("expeditor", JSON.stringify(data.userId));
-      localStorage.setItem("token",JSON.stringify(data.token))
+      localStorage.setItem("expeditor", data.userId);
+      localStorage.setItem("token",data.token);
+
       // localStorage.setItem("destinator",users[aleatoire(0,users.length-1)])
       // dispatch(setExpeditor(users.filter(element=>element._id===JSON.stringify(data.userId))))
       // // dispatch(setDestinator(users.filter(element=>element._id===localStorage.getItem("destinator"))[0]))
@@ -101,12 +103,13 @@ export default function Login() {
     }
 
   } else {
-    axios.get("http://localhost:4000/users", {headers: {Authorization: "Bearer " + localStorage.getItem("token"),}})
+    axios.get("http://localhost:4000/users", {headers: {Authorization: "Bearer " + (localStorage.getItem("token")),}})
       .then((res) => {dispatch(sendUsers(res.data));dispatch(setExpeditor(res.data.filter(element=>element._id===localStorage.getItem("expeditor"))[0])) })
       .catch(() => console.log('Chargement des users echoue'))
     axios.get("http://localhost:4000/messages", {headers: {Authorization: "Bearer " + localStorage.getItem("token"),}})
       .then((res) => {dispatch(sendMessages(res.data)); })
       .catch(() => console.log('Chargement des messages echoue'))  
+    // console.log('Bearer',localStorage.getItem("token"))
     return <Connect />
   }
 }

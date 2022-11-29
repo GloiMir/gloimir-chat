@@ -9,6 +9,5 @@ route.post('/register',register)//Enregistrement de l'utilisateur
 route.get('/users',Auth,sendUsers)//Récuperaton des utilisateurs
 route.get('/messages',Auth,sendMessages)//Recuperation des messages
 route.post('/message',createMessage)//Creation d'un nouveau message
-route.post('/user',createUser)//Creation d'un nouveau utilisateur
 
 export  {route}

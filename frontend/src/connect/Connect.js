@@ -9,20 +9,20 @@ export default function Connect() {
     const [login,setLogin] = useState(false)
     const myInput = useRef(null)
     const [myMessage, setMyMessage] = useState("")
-    const [io, setIo] = useState(socketClient("http://localhost:4000"))
+    // const [io, setIo] = useState(socketClient("http://localhost:4000"))
     const dispatch = useDispatch()
     const { users, messages, expeditor, destinator, discussion } = useSelector((state) => state.userReducer)
     // useEffect(() => {
-        io.on('newMessage', (data) => {
-            if (data.to === expeditor._id && data.from === destinator._id) {
-                dispatch(addMessage(data))
-                console.log('Nous avons reçu un message depuis un autre utilisateur')
-                return
-            }
-        })
-        io.on('newUser', (data) => {
-            dispatch(addUser(data))
-        })
+        // io.on('newMessage', (data) => {
+        //     if (data.to === expeditor._id && data.from === destinator._id) {
+        //         dispatch(addMessage(data))
+        //         console.log('Nous avons reçu un message depuis un autre utilisateur')
+        //         return
+        //     }
+        // })
+        // io.on('newUser', (data) => {
+        //     dispatch(addUser(data))
+        // })
     // }, [])
     if(!login){
         return (
@@ -47,14 +47,15 @@ export default function Connect() {
                 <div>
                     <div>
                         <div>
-                            {/* <img src={expeditor.image} alt='' width='50vw' height='100%' /> */}
-                            <span>{expeditor.username}</span>
+                            <img src={destinator.image} alt='' width='50vw' height='100%' />
+                            <span>{destinator.username}</span>
                         </div>
                         <img src={require('../communication2.jpg')} alt='' />
                         <div>
-                            {/* <img src={destinator.image} alt='' width='50vw' height='100%' /> */}
+                            <img src={expeditor.image} alt='' width='50vw' height='100%' />
+                            <img src={require('../logout.png')}  onClick={()=>{localStorage.clear();setLogin(true)}}  alt='' width='50vw' height='100%' />
                             {/* <span>{destinator.username}</span> */}
-                            <button onClick={()=>{localStorage.clear();setLogin(true)}}>Quitter</button>
+                            {/* <button onClick={()=>{localStorage.clear();setLogin(true)}}>Quitter</button> */}
                         </div>
                     </div>
                     <div>
@@ -64,22 +65,20 @@ export default function Connect() {
                                     if (item.from === expeditor._id)
                                         return <div key={index} className='expediteur'>
                                             <div>
-                                                <small key={index}>{item.content}</small>
-                                                
+                                                <small key={index}>{item.content}</small>  
                                             </div>
                                         </div>
                                     else
                                         return <div key={index} className='destinataire'>
                                             <div>
-                                                <small key={index}>{item.content}</small>
-                                                
+                                                <small key={index}>{item.content}</small>                    
                                             </div>
                                         </div>
                                 })
                             }
                         </div>
                         <div>
-                            <input ref={myInput} value={myMessage} type={'text'} placeholder='Entre votre message' multiple onChange={(e) => setMyMessage(e.target.value)} />
+                            <input ref={myInput} value={myMessage} type={'text'} placeholder='Entrez votre message' multiple onChange={(e) => setMyMessage(e.target.value)} />
                             <button onClick={
                                 () => {
                                     axios.post("http://localhost:4000/message", {

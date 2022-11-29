@@ -61,46 +61,20 @@ export default function Signup() {
             console.log(err);
         }
     }
-    const handleSignup = async (e) => {
-        e.preventDefault();
-        if (!image) return alert('Please upload your picture');
-        const url = await uploadImg(image);
-        const myUser = users.filter((element) => {
-            return element.username === newUsername
-        })
-        if (myUser.length === 0) {
-            if (newPassword1 === newPassword2) {
-                axios.post("http://localhost:4000/user", {
-                    "username": newUsername,
-                    "password": newPassword1,
-                    "image": url
-                });
-                // setTimeout(loadUsers, 1000)
-            } else console.log("Les 2 passwords ne sont pas identiques..")
-        } else console.log("Username deja utilisé..")
-    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
-        // const { password, username, email } = values;
-        // if (
-        //   values.password.trim() !== "" &&
-        //   values.username.trim() !== "" &&
-        //   values.email.trim() !== ""
-        // ) {
           const { data } = await axios.post("http://localhost:4000/register", {
             "username":newUsername,
             "password":newPassword1,
+            "image":await uploadImg()
           });
           if (data.status === false) {
             console.log("Error");
           } else {
             console.log("Success");
+            setLogin(true)
           }
-        // } else {
-        //   console.log("Complete all fields");
-        // }
       };
 
     if (!connect) {
@@ -118,10 +92,7 @@ export default function Signup() {
                         <input type={'password'} placeholder='Confirm password' onChange={(e) => setNewPassword2(e.target.value)} />
                         <button><input type={'file'} placeholder='image' onChange={validationImg} /></button>
                         <button
-                            onClick={
-                                // handleSignup
-                                handleSubmit
-                            }
+                            onClick={handleSubmit}
                         >Creer</button>
                         <small>Ou</small>
                         <button onClick={() => setLogin(true)}>Se connecter</button>
