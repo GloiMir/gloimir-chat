@@ -16,7 +16,7 @@ mongoose.connect(process.env.CONNECTION_STRING,{ useNewUrlParser: true,useUnifie
 
 const io =new Server(serveur, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: 'https://pomodoro-umber.vercel.app/',
         methods: ["GET", "POST"]
     }
 })
