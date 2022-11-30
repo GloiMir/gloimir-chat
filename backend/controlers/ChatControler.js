@@ -98,4 +98,4 @@ const createMessage = (req, _) => {
 }
 
 
-export { login, register, sendUsers, sendMessages, createMessage, createUser }
+export { login, register, sendUsers, sendMessages, createMessage }
