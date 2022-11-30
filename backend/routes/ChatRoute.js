@@ -1,5 +1,5 @@
 import express from 'express'
-import {login,register,sendUsers,sendMessages,createMessage,createUser} from '../controlers/ChatControler.js'
+import {login,register,sendUsers,sendMessages,createMessage} from '../controlers/ChatControler.js'
 import {Auth} from '../middleware/Auth.js' 
 
 const route = express.Router();
