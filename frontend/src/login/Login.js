@@ -16,17 +16,17 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post("http://localhost:4000/login", {
+    const { data } = await axios.post("https://chat-3670.onrender.com/login", {
       username,
       password
     });
     if (data.status === false) {
       console.log("Username Or Password Invalid");
     } else {
-      axios.get("http://localhost:4000/users", {headers: {Authorization: "Bearer " + (data.token),}})
+      axios.get("https://chat-3670.onrender.com/users", {headers: {Authorization: "Bearer " + (data.token),}})
         .then((res) => {dispatch(sendUsers(res.data));dispatch(setExpeditor(res.data.filter(element=>element._id===data.userId)[0])) })
         .catch(() => console.log('Chargement des users echoue'))
-      axios.get("http://localhost:4000/messages", {headers: {Authorization: "Bearer " + (data.token),}})
+      axios.get("https://chat-3670.onrender.com/messages", {headers: {Authorization: "Bearer " + (data.token),}})
         .then((res) => {dispatch(sendMessages(res.data)); })
         .catch(() => console.log('Chargement des messages echoue'))  
 
@@ -61,10 +61,10 @@ export default function Login() {
     }
 
   } else {
-    axios.get("http://localhost:4000/users", {headers: {Authorization: "Bearer " + (localStorage.getItem("token")),}})
+    axios.get("https://chat-3670.onrender.com/users", {headers: {Authorization: "Bearer " + (localStorage.getItem("token")),}})
       .then((res) => {dispatch(sendUsers(res.data));dispatch(setExpeditor(res.data.filter(element=>element._id===localStorage.getItem("expeditor"))[0])) })
       .catch(() => console.log('Chargement des users echoue'))
-    axios.get("http://localhost:4000/messages", {headers: {Authorization: "Bearer " + localStorage.getItem("token"),}})
+    axios.get("https://chat-3670.onrender.com/messages", {headers: {Authorization: "Bearer " + localStorage.getItem("token"),}})
       .then((res) => {dispatch(sendMessages(res.data)); })
       .catch(() => console.log('Chargement des messages echoue'))  
     return <Connect />

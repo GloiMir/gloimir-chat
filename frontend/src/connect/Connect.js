@@ -9,7 +9,7 @@ export default function Connect() {
     const [login, setLogin] = useState(false)
     const myInput = useRef(null)
     const [myMessage, setMyMessage] = useState("")
-    const [io, setIo] = useState(socketClient("http://localhost:4000"))
+    const [io, setIo] = useState(socketClient("https://chat-3670.onrender.com"))
     const dispatch = useDispatch()
     const { users, messages, expeditor, destinator, discussion } = useSelector((state) => state.userReducer)
 
@@ -79,7 +79,7 @@ export default function Connect() {
                             <input ref={myInput} value={myMessage} type={'text'} placeholder='Entrez votre message' multiple onChange={(e) => setMyMessage(e.target.value)} />
                             <button onClick={
                                 () => {
-                                    axios.post("http://localhost:4000/message", {
+                                    axios.post("https://chat-3670.onrender.com/message", {
                                         "date": new Date(),
                                         "from": expeditor._id,
                                         "to": destinator._id,

@@ -36,7 +36,7 @@ export default function Signup() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { data } = await axios.post("http://localhost:4000/register", {
+        const { data } = await axios.post("https://chat-3670.onrender.com/register", {
             "username": newUsername,
             "password": newPassword1,
             "image": await uploadImg()
