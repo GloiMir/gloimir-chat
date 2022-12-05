@@ -9,7 +9,7 @@ export default function Connect() {
     const [login, setLogin] = useState(false)
     const myInput = useRef(null)
     const [myMessage, setMyMessage] = useState("")
-    const [io, setIo] = useState(socketClient("https://chat-3670.onrender.com"))
+    const [io, setIo] = useState(socketClient("https://chat-3670.onrender.com",{transports: ['websocket', 'polling', 'flashsocket']}))
     const dispatch = useDispatch()
     const { users, messages, expeditor, destinator, discussion } = useSelector((state) => state.userReducer)
 
