@@ -14,7 +14,7 @@ L'usage de GloiMir-Chat est très simple:
 *Une fois connecté, vous accedez à la page de discussion, et là vous avez la liste de tous les membres de l'application, cliquant sur l'un d'eux vous aurez tous les messages déjà echangés avec la personne concernée,
 *Pour l'inscription il est juste demandé le nom, le mot de passe et l'image de profile  
 
-## Contributing
+## Contribution
 
 Les pull requests sont les bienvenus. Pour les changements majeurs, ouvrez une issue d'abord s'il vous plaît pour discuter ce que vous voudrez changer
 
