@@ -29,3 +29,5 @@ app.use(cors())
 app.use(route)
 
 serveur.listen(4000,()=>console.log('Notre serveur est en marche...'))
+
+export {app}
